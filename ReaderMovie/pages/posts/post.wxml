@@ -10,4 +10,37 @@
     <image src="/images/iqiyi.png"></image>
   </swiper-item>
 </swiper>
+
+<view class="post-container">
+  <view class="post-author-date">
+    <image class="post-author" src="/images/avatar/1.png"></image> 
+    <text class="post-date">Nov 25 2016</text>
+  </view>
+  <text class="post-title">正是虾肥蟹壮时</text>
+  <image class="post-content-image" src="/images/post/cat.png"></image>
+  <text class="post-content">正是虾肥蟹壮时正是虾肥蟹壮时正是虾肥蟹壮时正是虾肥蟹壮时正是虾肥蟹壮时</text>
+  <view class="post-like">
+    <image class="post-like-image" src="/images/icon/chat.png"></image>
+    <text class="post-like-font">98</text>
+    <image class="post-like-image" src="/images/icon/view.png"></image>
+    <text class="post-like-font">38</text>
+  </view>
+</view>
+<view class="post-container">
+  <view class="post-author-date">
+    <image class="post-author" src="/images/avatar/1.png"></image> 
+    <text class="post-date">Nov 30 2016</text>
+  </view>
+  <text class="post-title">这是第二个Cell啊</text>
+  <image class="post-content-image" src="/images/post/crab.png"></image>
+  <text class="post-content">这是第二个Cell啊这是第二个Cell啊这是第二个Cell啊这是第二个Cell啊这是第二个Cell啊</text>
+  <view class="post-like">
+    <image class="post-like-image" src="/images/icon/chat.png"></image>
+    <text class="post-like-font">98</text>
+    <image class="post-like-image" src="/images/icon/view.png"></image>
+    <text class="post-like-font">38</text>
+  </view>
+
+</view>
+
 </view>
