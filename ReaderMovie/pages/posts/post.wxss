@@ -10,14 +10,4 @@ swiper image {
   height: 100%;
 }
 
-.post-container {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-top: 1px solid #ededed;
-  border-bottom: 1px solid #ededed;
-  margin-bottom: 40rpx;
-  margin-top: 20rpx;
-  padding-bottom: 5px;
-}
 
