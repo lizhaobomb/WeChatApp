@@ -1,15 +1,15 @@
 <!--post-detail.wxml-->
 
 <view class="content-container">
-  <image class="head-image" src="/images/post/sls.png"></image>
+  <image class="head-image" src="{{postData.headerImage}}"></image>
   <image class="music" src="/images/music/music-start.png"></image>
   <view class="post-author-container">
-    <image class="post-avatar" src="/images/avatar/2.png"></image>
-    <text class="post-author">李召</text>
+    <image class="post-avatar" src="{{postData.avatar}}"></image>
+    <text class="post-author">{{postData.author}}</text>
     <text class="post-publish">发表于</text>
-    <text class="post-publish-time">两天前</text>
+    <text class="post-publish-time">{{postData.datetime}}</text>
   </view>
-  <text class="post-title">我是标题啊</text>
+  <text class="post-title">{{postData.title}}</text>
   <view class="seperator-container">
     <view class="seperator-container-image">
       <image src="/images/icon/collection.png"></image>
@@ -18,5 +18,5 @@
     <view class="seperator">
     </view>
   </view>
-  <text class="content">巴拉斯都放假了世纪东方蓝思科技大风蓝色极度分裂都说了房价</text>
+  <text class="content">{{postData.detail}}</text>
 </view>
