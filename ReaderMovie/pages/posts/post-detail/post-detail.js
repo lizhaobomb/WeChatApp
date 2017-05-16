@@ -18,6 +18,34 @@ Page({
     this.setData({
       postData:postData
     })
+    this.data.postId = postId
+    var postsCollected = wx.getStorageSync('posts_collected')
+    if(postsCollected){
+      var postCollected = postsCollected[postId]
+      this.setData({
+        collected: postCollected
+      }) 
+    } else {
+      var postsCollected = {}
+      postsCollected[postId] = false
+      wx.setStorageSync('posts_collected', postsCollected)
+    }
+       
+  },
+
+  onCollectionTap: function() {
+    var postsCollected = wx.getStorageSync('posts_collected')
+    var postCollected = postsCollected[this.data.postId]
+    postCollected = !postCollected
+    postsCollected[this.data.postId] = postCollected
+    wx.setStorageSync('posts_collected', postsCollected)
+    this.setData({
+      collected:postCollected
+    })
+    var title = postCollected ? '收藏成功' : '取消成功';
+    wx.showToast({
+      title: title
+    })
   },
 
   /**
