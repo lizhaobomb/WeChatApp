@@ -1,7 +1,7 @@
 <!--post-detail.wxml-->
 
 <view class="content-container">
-  <image class="head-image" src="{{postData.headerImage}}"></image>
+  <image class="head-image" src="{{isPlaying? postData.music.coverImgUrl :postData.headerImage}}"></image>
   <image catchtap="onMusicTap" class="music" src="{{isPlaying? '/images/music/music-stop.png' : '/images/music/music-start.png'}}"></image>
   <view class="post-author-container">
     <image class="post-avatar" src="{{postData.avatar}}"></image>

@@ -1,5 +1,6 @@
 // post-detail.js
 var postsData = require('../../../data/localDatabase.js')
+var globalData = getApp().globalData
 Page({
 
   /**
@@ -16,8 +17,15 @@ Page({
     var postId = options.id;
     var postData = postsData.postList[postId];
     this.setData({
-      postData: postData
+      postData: postData,
     })
+
+    if(postId == globalData.g_currentId) {
+      this.setData({
+        isPlaying: globalData.g_isPlaying
+      })
+    }
+
     this.data.postId = postId
     var postsCollected = wx.getStorageSync('posts_collected')
     if (postsCollected) {
@@ -30,6 +38,19 @@ Page({
       postsCollected[postId] = false
       wx.setStorageSync('posts_collected', postsCollected)
     }
+
+    var that = this
+    wx.onBackgroundAudioPlay(function () {
+      that.setData({
+        isPlaying: true
+      })
+    })
+
+    wx.onBackgroundAudioPause(function () {
+      that.setData({
+        isPlaying: false
+      })
+    })
 
   },
 
@@ -94,14 +115,19 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide')
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    if(this.data.isPlaying) {
+      globalData.g_isPlaying = this.data.isPlaying
+      globalData.g_currentId = this.data.postData.postId
+    }
+    
+    console.log('onUnload')
   },
 
   /**
