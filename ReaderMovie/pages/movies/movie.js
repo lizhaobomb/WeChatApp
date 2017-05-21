@@ -1,6 +1,4 @@
-// posts.js
-
-var posts = require('../../data/localDatabase.js')
+// movie.js
 Page({
 
   /**
@@ -14,9 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      posts:posts.postList
-      })
+  
   },
 
   /**
@@ -66,33 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
   
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  onPostTap:function(event) {
-    var postId = event.currentTarget.dataset.postid
-    wx.navigateTo({
-      url: 'post-detail/post-detail?id='+postId
-    })
-  },
-
-  onSwiperTap: function (event) {
-    var postId = event.target.dataset.postid
-    wx.navigateTo({
-      url: 'post-detail/post-detail?id='+postId
-    })
-  },
+  }
 })
