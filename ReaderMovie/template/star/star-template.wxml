@@ -1,10 +1,12 @@
 <template name="star">
   <view class="star-container">
-    <image class="star-image" src="/images/icon/star.png"></image>
-    <image class="star-image" src="/images/icon/star.png"></image>
-    <image class="star-image" src="/images/icon/star.png"></image>
-    <image class="star-image" src="/images/icon/star.png"></image>
-    <image class="star-image" src="/images/icon/star.png"></image>
+    <view class="stars">
+      <image class="star-image" src="/images/icon/star.png"></image>
+      <image class="star-image" src="/images/icon/star.png"></image>
+      <image class="star-image" src="/images/icon/star.png"></image>
+      <image class="star-image" src="/images/icon/star.png"></image>
+      <image class="star-image" src="/images/icon/star.png"></image>
+    </view>
     <text>8.5</text>
   </view>
 </template>

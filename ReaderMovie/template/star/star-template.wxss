@@ -2,7 +2,13 @@
   display: flex;
   flex-direction: row;
 }
+.stars {
+  display: flex;
+  flex-direction: row;
+  height: 17rpx;
+  margin-right: 24rpx;
+}
 .star-image {
-  width:17px;
-  height:17px
+  width:17rpx;
+  height:17rpx
 }

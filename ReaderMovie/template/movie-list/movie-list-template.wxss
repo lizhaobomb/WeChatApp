@@ -5,7 +5,7 @@
 }
 
 .list-header {
-  background-color: red;
+  display: flex;
 	flex-direction: row;
 }
 
@@ -15,6 +15,6 @@
 }
 
 .movie-list {
-  background-color: green;
+  display: flex;
   flex-direction: row;
 }
