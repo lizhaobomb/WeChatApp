@@ -1,0 +1,8 @@
+<import src="../star/star-template.wxml" />
+<template name="movie-template">
+  <view class="movie-container">
+    <image class="movie-img" src="https://img1.doubanio.com/view/photo/photo/public/p2403563079.webp"></image>
+    <text class="movie-name">你的名字.</text>
+    <template is="star"></template>
+  </view>
+</template>

@@ -1,0 +1,20 @@
+@import "../movie/movie-template.wxss";
+.movie-list-container {
+	display: flex;
+	flex-direction: column
+}
+
+.list-header {
+  background-color: red;
+	flex-direction: row;
+}
+
+.right-arrow-img {
+	width: 9px;
+	height: 16px;
+}
+
+.movie-list {
+  background-color: green;
+  flex-direction: row;
+}
