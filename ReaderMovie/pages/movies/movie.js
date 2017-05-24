@@ -15,25 +15,53 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var in_theatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters"
-    var coming_soonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon"
-    var top250Url = app.globalData.doubanBase + "/v2/movie/top250"
-   console.log(in_theatersUrl,coming_soonUrl,top250Url)
+    var query = "?start=0&count=3"
+    var in_theatersUrl = app.globalData.doubanBase + "/v2/movie/in_theaters" + query
+    var coming_soonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" + query
+    var top250Url = app.globalData.doubanBase + "/v2/movie/top250" + query
+
     this.getMovieListData(in_theatersUrl)
-    this.getMovieListData(coming_soonUrl)
-    this.getMovieListData(top250Url)
+    // this.getMovieListData(coming_soonUrl)
+    // this.getMovieListData(top250Url)
   },
 
   getMovieListData: function (url) {
+    var that = this
     wx.request({
       url: url,
+      method: 'GET',
+      header: {
+        "Content-Type": "json"
+      },
       success: function (res) {
         console.log(res)
+        that.processDoubanMovies(res.data)
       },
       fail: function (error) {
         console.log(error)
       }
     }) 
+  },
+
+  processDoubanMovies:function(moviesData) {
+    var movies = []
+    for(var idx in moviesData.subjects) {
+      var subject = moviesData.subjects[idx]
+      var title = subject.title
+      if(title.length > 6) {
+        title = title.substring(0,6) + "..."
+      }
+      var temp = {
+        title:title,
+        average: subject.rating.average,
+        coverageUrl: subject.images.large,
+        movieId: subject.id
+      }
+      movies.push(temp)
+    }
+    this.setData({
+      movies: movies
+    })
   },
 
   /**
