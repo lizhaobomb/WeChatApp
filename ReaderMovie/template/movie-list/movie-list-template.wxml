@@ -3,7 +3,7 @@
   <view class="movie-list-container">
     <view class="inner-container">
       <view class="list-header">
-        <text class="header-title">正在热映</text>
+        <text class="header-title">{{sectionTitle}}</text>
         <view class="more-container">
           <text class="more-text">更多</text>
           <image class="more-img" src="/images/icon/arrow-right.png"></image>

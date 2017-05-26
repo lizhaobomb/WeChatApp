@@ -1,14 +1,16 @@
 // movie.js
 
 var app = getApp()
-
+var util = require('../../utils/utils.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    inTheaters: {},
+    comingSoon: {},
+    top250: {}
   },
 
   /**
@@ -20,12 +22,12 @@ Page({
     var coming_soonUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" + query
     var top250Url = app.globalData.doubanBase + "/v2/movie/top250" + query
 
-    this.getMovieListData(in_theatersUrl)
-    // this.getMovieListData(coming_soonUrl)
-    // this.getMovieListData(top250Url)
+    this.getMovieListData(in_theatersUrl, "inTheaters", "正在热映")
+    this.getMovieListData(coming_soonUrl, "comingSoon", "即将上映")
+    this.getMovieListData(top250Url, "top250", "top250")
   },
 
-  getMovieListData: function (url) {
+  getMovieListData: function (url, key, sectionTitle) {
     var that = this
     wx.request({
       url: url,
@@ -35,7 +37,7 @@ Page({
       },
       success: function (res) {
         console.log(res)
-        that.processDoubanMovies(res.data)
+        that.processDoubanMovies(res.data, key, sectionTitle)
       },
       fail: function (error) {
         console.log(error)
@@ -43,7 +45,8 @@ Page({
     }) 
   },
 
-  processDoubanMovies:function(moviesData) {
+  processDoubanMovies:function(moviesData, key, sectionTitle) {
+    console.log(key)
     var movies = []
     for(var idx in moviesData.subjects) {
       var subject = moviesData.subjects[idx]
@@ -52,6 +55,7 @@ Page({
         title = title.substring(0,6) + "..."
       }
       var temp = {
+        stars:util.convertToStarArray(subject.rating.stars),
         title:title,
         average: subject.rating.average,
         coverageUrl: subject.images.large,
@@ -59,9 +63,12 @@ Page({
       }
       movies.push(temp)
     }
-    this.setData({
-      movies: movies
-    })
+    var readyData = {}
+    readyData[key] = {
+      sectionTitle: sectionTitle,
+      movies:movies
+      }
+    this.setData(readyData)
   },
 
   /**
