@@ -51,8 +51,8 @@ Page({
     for(var idx in moviesData.subjects) {
       var subject = moviesData.subjects[idx]
       var title = subject.title
-      if(title.length > 6) {
-        title = title.substring(0,6) + "..."
+      if(title.length > 7) {
+        title = title.substring(0,7) + "..."
       }
       var temp = {
         stars:util.convertToStarArray(subject.rating.stars),
