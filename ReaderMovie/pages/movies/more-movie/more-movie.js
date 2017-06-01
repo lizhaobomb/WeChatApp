@@ -7,7 +7,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    movies: {},
+    requestUrl: "",
+    totalCount: 0,
+    isEmpty: true,
+    isLoading: false
   },
 
   /**
@@ -20,22 +24,35 @@ Page({
     })
     //即将上映，top250
     var categoryUrl = ""
-    switch(navigationTitle) {
+    switch (navigationTitle) {
       case '正在热映':
         categoryUrl = app.globalData.doubanBase + "/v2/movie/in_theaters"
-      break
+        break
       case '即将上映':
-        categoryUrl = app.globalData.doubanBase + "/v2/movie/coming_soon" 
+        categoryUrl = app.globalData.doubanBase + "/v2/movie/coming_soon"
         break
       case 'top250':
-        categoryUrl = app.globalData.doubanBase + "/v2/movie/top250" 
+        categoryUrl = app.globalData.doubanBase + "/v2/movie/top250"
         break
     }
-    
+    this.data.requestUrl = categoryUrl
     utils.http(categoryUrl, this.processDoubanMovies)
   },
+
+  onScrollToLower: function (event) {
+    if(this.data.isLoading) {
+      return
+    }
+    console.log("加载更多")
+    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20"
+    utils.http(nextUrl, this.processDoubanMovies)
+    this.data.isLoading = true
+    wx.showNavigationBarLoading()
+  },
+
   processDoubanMovies: function (moviesData) {
     var movies = []
+    var totalMovies = []
     for (var idx in moviesData.subjects) {
       var subject = moviesData.subjects[idx]
       var title = subject.title
@@ -51,6 +68,27 @@ Page({
       }
       movies.push(temp)
     }
-    this.setData({movies:movies})
+
+    if(!this.data.isEmpty) {
+      totalMovies = this.data.movies.concat(movies)
+    } else {
+      totalMovies = movies
+      this.data.isEmpty = false
+    }
+
+    this.setData({ movies: totalMovies })
+    this.data.totalCount += 20
+    this.data.isLoading = false
+    wx.hideNavigationBarLoading()
+    wx.stopPullDownRefresh()
+  },
+
+  onPullDownRefresh: function () {
+    console.log("刷新")
+    var refreshUrl = this.data.requestUrl + "?start=0&count=20"
+    this.data.isEmpty = true
+    this.data.movies = {}
+    utils.http(nextUrl, this.processDoubanMovies)
+    wx.showNavigationBarLoading()
   }
 })
