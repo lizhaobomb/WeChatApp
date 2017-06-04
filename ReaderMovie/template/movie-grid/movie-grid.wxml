@@ -1,12 +1,11 @@
 <import src="../movie/movie-template" />
 <template name="movieGridTemplate">
-  <scroll-view class="grid-container"
-  scroll-y="true" scroll-x="false" 
-  bindscrolltolower="onScrollToLower">
+<text>search 面板出来了</text>>
+  <view class="grid-container">
     <block wx:for="{{movies}}" wx:for-item="movie">
       <view class="single-view-container">
         <template is="movie-template" data="{{...movie}}"></template>
       </view>
     </block>
-  </scroll-view>
+  </view>
 </template>

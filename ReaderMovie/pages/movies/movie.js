@@ -10,7 +10,9 @@ Page({
   data: {
     inTheaters: {},
     comingSoon: {},
-    top250: {}
+    top250: {},
+    searchPanelShow: false,
+    moviePanelShow: true
   },
 
   /**
@@ -42,21 +44,21 @@ Page({
       fail: function (error) {
         console.log(error)
       }
-    }) 
+    })
   },
 
-  processDoubanMovies:function(moviesData, key, sectionTitle) {
+  processDoubanMovies: function (moviesData, key, sectionTitle) {
     console.log(key)
     var movies = []
-    for(var idx in moviesData.subjects) {
+    for (var idx in moviesData.subjects) {
       var subject = moviesData.subjects[idx]
       var title = subject.title
-      if(title.length > 7) {
-        title = title.substring(0,7) + "..."
+      if (title.length > 7) {
+        title = title.substring(0, 7) + "..."
       }
       var temp = {
-        stars:util.convertToStarArray(subject.rating.stars),
-        title:title,
+        stars: util.convertToStarArray(subject.rating.stars),
+        title: title,
         average: subject.rating.average,
         coverageUrl: subject.images.large,
         movieId: subject.id
@@ -66,15 +68,34 @@ Page({
     var readyData = {}
     readyData[key] = {
       sectionTitle: sectionTitle,
-      movies:movies
-      }
+      movies: movies
+    }
     this.setData(readyData)
   },
 
-  onMoreTaped:function(event) {
+  onMoreTaped: function (event) {
     var category = event.currentTarget.dataset.category
     wx.navigateTo({
       url: 'more-movie/more-movie?category=' + category
     })
+  },
+
+  onBindFocus: function () {
+    this.setData({
+      searchPanelShow: true,
+      moviePanelShow: false
+    })
+  },
+
+  onCancelImgTap: function () {
+    this.setData({
+      searchPanelShow: false,
+      moviePanelShow: true
+    })
+  },
+
+  onBindChange: function () {
+
   }
+
 })

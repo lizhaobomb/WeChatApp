@@ -52,6 +52,18 @@ Page({
       })
     })
 
+    wx.onBackgroundAudioStop(function() {
+      that.setData({
+        isPlaying: false
+      })
+    })
+
+    wx.getBackgroundAudioManager().onEnded(function () {
+      that.setData({
+        isPlaying: false
+      })
+    })
+
   },
 
   onCollectionTap: function () {

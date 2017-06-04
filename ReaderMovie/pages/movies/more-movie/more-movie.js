@@ -11,7 +11,6 @@ Page({
     requestUrl: "",
     totalCount: 0,
     isEmpty: true,
-    isLoading: false
   },
 
   /**
@@ -39,14 +38,20 @@ Page({
     utils.http(categoryUrl, this.processDoubanMovies)
   },
 
-  onScrollToLower: function (event) {
-    if(this.data.isLoading) {
-      return
-    }
-    console.log("加载更多")
+  // onScrollToLower: function (event) {
+    // if(this.data.isLoading) {
+    //   return
+    // }
+    // console.log("加载更多")
+    // var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20"
+    // utils.http(nextUrl, this.processDoubanMovies)
+    // this.data.isLoading = true
+    // wx.showNavigationBarLoading()
+  // },
+
+  onReachBottom: function () {
     var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20"
     utils.http(nextUrl, this.processDoubanMovies)
-    this.data.isLoading = true
     wx.showNavigationBarLoading()
   },
 
@@ -78,7 +83,6 @@ Page({
 
     this.setData({ movies: totalMovies })
     this.data.totalCount += 20
-    this.data.isLoading = false
     wx.hideNavigationBarLoading()
     wx.stopPullDownRefresh()
   },
@@ -88,7 +92,7 @@ Page({
     var refreshUrl = this.data.requestUrl + "?start=0&count=20"
     this.data.isEmpty = true
     this.data.movies = {}
-    utils.http(nextUrl, this.processDoubanMovies)
+    utils.http(refreshUrl, this.processDoubanMovies)
     wx.showNavigationBarLoading()
   }
 })
