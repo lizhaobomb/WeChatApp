@@ -1,6 +1,5 @@
 <import src="../movie/movie-template" />
 <template name="movieGridTemplate">
-<text>search 面板出来了</text>>
   <view class="grid-container">
     <block wx:for="{{movies}}" wx:for-item="movie">
       <view class="single-view-container">

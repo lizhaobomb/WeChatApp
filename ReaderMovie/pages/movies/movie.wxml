@@ -3,7 +3,10 @@
 <view class="search">
  <icon type="search" class="search-img" size="13" color="#405f80" />
  <input  type="text" placeholder="血战钢锯岭、你的名字"
- placeholder-class="placeholder" bindfocus="onBindFocus" bindChange="onBindChange"/>
+  placeholder-class="placeholder"
+  bindfocus="onBindFocus" 
+  bindblur="onBindBlur" 
+  />
  <image wx:if="{{searchPanelShow}}" class="xx-img" src="/images/icon/xx.png" bindtap="onCancelImgTap"></image>
 </view>
 
@@ -14,5 +17,5 @@
 </view>
 
 <view class="search-panel" wx:if="{{searchPanelShow}}">
-  <template is="movieGridTemplate"></template>
+  <template is="movieGridTemplate" data="{{...searchResult}}"></template>
 </view>

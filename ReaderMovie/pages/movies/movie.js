@@ -11,6 +11,7 @@ Page({
     inTheaters: {},
     comingSoon: {},
     top250: {},
+    searchResult: {},
     searchPanelShow: false,
     moviePanelShow: true
   },
@@ -30,6 +31,7 @@ Page({
   },
 
   getMovieListData: function (url, key, sectionTitle) {
+    wx.showNavigationBarLoading()
     var that = this
     wx.request({
       url: url,
@@ -38,17 +40,18 @@ Page({
         "Content-Type": "json"
       },
       success: function (res) {
+        wx.hideNavigationBarLoading()
         console.log(res)
         that.processDoubanMovies(res.data, key, sectionTitle)
       },
       fail: function (error) {
+        wx.hideNavigationBarLoading()
         console.log(error)
       }
     })
   },
 
   processDoubanMovies: function (moviesData, key, sectionTitle) {
-    console.log(key)
     var movies = []
     for (var idx in moviesData.subjects) {
       var subject = moviesData.subjects[idx]
@@ -94,7 +97,10 @@ Page({
     })
   },
 
-  onBindChange: function () {
+  onBindBlur: function (event) {
+    var searchText = event.detail.value
+    var searchUrl = app.globalData.doubanBase + "/v2/movie/search?q=" + searchText
+    this.getMovieListData(searchUrl, "searchResult", "")
 
   }
 
